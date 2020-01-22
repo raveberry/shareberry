@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools" package="de.raveberry.shareberry">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Raveberry does not yet support https.
+         Allow cleartext traffic for all domains since we don't the names of the requested domains -->
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:usesCleartextTraffic="true"
+            android:theme="@style/Platform.MaterialComponents.Light" >
+
+        <activity android:name=".Configuration">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".Send">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- Unfortunately I could not define the domain for youtube links more precisely.
+                So now this app will offer to share all text, not only youtube links. -->
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Shareberry</string>
+    <string name="shareberry_configuration">Shareberry Configuration</string>
+    <string name="reorder">reorder</string>
+</resources>
