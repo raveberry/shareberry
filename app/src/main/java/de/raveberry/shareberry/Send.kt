@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.RetryPolicy
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
@@ -19,11 +21,15 @@ class Send : Activity() {
                 if ("text/plain" == intent.type) {
                     val query = intent.getStringExtra(Intent.EXTRA_TEXT)
 
-                    val urls = Storage.getUrls(this)
-                    val queue = Volley.newRequestQueue(this)
-                    newRequest(queue, urls, 0, query)
+                    if (query != null) {
+                        val urls = Storage.getUrls(this)
+                        val queue = Volley.newRequestQueue(this)
+                        newRequest(queue, urls, 0, query)
 
-                    toastMessage("queueing song...")
+                        toastMessage("queueing song...")
+                    } else {
+                        toastMessage("no query given")
+                    }
                 }
                 finish()
             }
@@ -64,6 +70,16 @@ class Send : Activity() {
             }) {
             override fun getParams(): Map<String, String> {
                 return hashMapOf("query" to query)
+            }
+            // By default, volley retries requests when they take too long
+            // Override the retry policy to prevent this behavior, as Raveberry needs some time occasionally
+            // https://stackoverflow.com/questions/22428343/android-volley-double-post-when-have-slow-request
+            override fun getRetryPolicy(): RetryPolicy {
+                return DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                )
             }
         }
         queue.add(request)

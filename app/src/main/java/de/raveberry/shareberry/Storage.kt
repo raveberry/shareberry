@@ -9,11 +9,11 @@ object Storage {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
         val defaultUrls = listOf(
-            "http://raveberry",
             "http://raveberry.local",
+            "http://raveberry",
             "http://192.168.4.1",
-            "http://raveberry:8080",
             "http://raveberry.local:8080",
+            "http://raveberry:8080",
             "http://192.168.4.1:8080"
         ).joinToString(";")
         val urlString = sharedPreferences.getString("urls", defaultUrls)
