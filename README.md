@@ -11,4 +11,4 @@ In the first picture you can see the Shareberry icon in the 'Share via' menu of 
 
 In the second picture you can see the configuration page of Shareberry with the default settings. When sharing a link, it will try the given urls in order until Raveberry could be reached or all urls have been tried.
 
-A prebuilt apk can be found at [`app/release/shareberry.apk`](app/release/shareberry.apk).
+A prebuilt apk can be found [here](https://github.com/raveberry/shareberry/releases/latest/download/shareberry.apk).
